@@ -1,6 +1,4 @@
-require "minitest/spec"
-require "minitest/autorun"
-
+require "helper"
 require "client"
 
 # FyberOffers::Client.new api_url: url,
