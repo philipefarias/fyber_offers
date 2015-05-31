@@ -16,7 +16,7 @@ describe FyberOffers::Web do
     Capybara.use_default_driver
   end
 
-  it "it shows a message when there's none" do
+  it "shows a message when there's none" do
     page.must_have_content "No offers available"
   end
 end
