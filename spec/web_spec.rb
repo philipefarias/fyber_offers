@@ -1,27 +1,22 @@
 require "helper"
-require "rack/test"
+require "capybara"
+require "capybara_minitest_spec"
 require "web"
 
 describe FyberOffers::Web do
-  include Rack::Test::Methods
+  include Capybara::DSL
 
-  def app
-    FyberOffers::Web.new
+  before do
+    Capybara.app = FyberOffers::Web.new
+    visit "/"
   end
 
-  it "renders the page" do
-    get "/"
-
-    last_response.must_be :ok?
-    last_response["Content-Type"].must_equal "text/html;charset=utf-8"
-    last_response.body.must_equal "Fyber Offers"
+  after do
+    Capybara.reset_sessions!
+    Capybara.use_default_driver
   end
 
-  it "renders nothing for unknown page" do
-    get "/unknown"
-
-    last_response.wont_be :ok?
-    last_response["Content-Type"].must_equal "text/html;charset=utf-8"
-    last_response.body.must_equal ""
+  it "it shows a message when there's none" do
+    page.must_have_content "No offers available"
   end
 end

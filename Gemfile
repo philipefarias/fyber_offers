@@ -1,6 +1,9 @@
 source "https://rubygems.org"
 
 gem "rake"
-gem "rack"
+gem "sinatra"
 
-gem "rack-test", group: :test
+group :test do
+  gem "rack-test"
+  gem "capybara_minitest_spec"
+end
