@@ -20,6 +20,16 @@
     <![endif]-->
   </head>
   <body>
-    <p>No offers available</p>
+    <div id="offers">
+      <% if offers.empty? %>
+        <p>No offers available</p>
+      <% else %>
+        <% offers.each do |offer| %>
+          <div class="offer">
+            <%= offer[:title] %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   </body>
 </html>

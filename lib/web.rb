@@ -7,7 +7,19 @@ module FyberOffers
     end
 
     get "/" do
-      erb :index
+      erb :index, locals: { offers: fetch_offers }
+    end
+
+    private
+
+    def fetch_offers
+      Fetcher.new.call
+    end
+  end
+
+  class Fetcher
+    def call
+      []
     end
   end
 end
