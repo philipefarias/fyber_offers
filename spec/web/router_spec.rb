@@ -15,24 +15,6 @@ describe FyberOffers::Web::Router do
     Capybara.use_default_driver
   end
 
-  it "shows a message when there's none" do
-    fetcher = -> { [] }
-    stub(FyberOffers::Web::Fetcher).new { fetcher }
-
-    visit "/"
-
-    page.must_have_content "No offers available"
-  end
-
-  it "shows a list of offers when there's some" do
-    fetcher = -> { [offer] }
-    stub(FyberOffers::Web::Fetcher).new { fetcher }
-
-    visit "/"
-
-    page.must_have_content "I'm an offer!"
-  end
-
   let :offer do
     {
       "title" => "I'm an offer!",
@@ -45,5 +27,27 @@ describe FyberOffers::Web::Router do
         { "readable" => "Free"  }
       ]
     }
+  end
+
+  describe "GET '/'" do
+    it "shows a message when there's none" do
+      stub(FyberOffers::Web::REPO).get { [] }
+
+      visit "/"
+
+      page.must_have_content "No offers available"
+    end
+
+    it "shows a list of offers when there's some" do
+      stub(FyberOffers::Web::REPO).get { [offer] }
+
+      visit "/"
+
+      page.must_have_content "I'm an offer!"
+    end
+  end
+
+  describe "POST '/'" do
+    it "renders the index"
   end
 end

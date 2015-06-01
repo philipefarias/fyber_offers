@@ -21,6 +21,29 @@
   </head>
   <body>
     <h1>Offer Wall</h1>
+
+    <h2>Fetch offers</h2>
+    <div>
+      <form accept-charset="UTF-8" action="/" method="post">
+        <div class="field">
+          <label for="uid">uid</label>
+          <input type="text" id="uid" name="uid">
+        </div>
+
+        <div class="field">
+          <label for="pub0">pub0</label>
+          <input type="text" id="pub0" name="pub0">
+        </div>
+
+        <div class="field">
+          <label for="page">page</label>
+          <input type="text" id="page" name="page">
+        </div>
+
+        <input type="submit" name="commit" value="Fetch offers">
+      </form>
+    </div>
+
     <h2>Listing offers</h2>
     <div id="offers">
       <% if offers.empty? %>

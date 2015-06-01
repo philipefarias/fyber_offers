@@ -5,17 +5,29 @@ module FyberOffers
 
     class Router < Sinatra::Base
       configure do
+        enable :sessions
         set :views, settings.root + '/templates'
+        set :erb, escape_html: true
       end
 
       get "/" do
-        erb :index, locals: { offers: fetch_offers }
+        offers = REPO.get session["id"]
+        erb :index, locals: { offers: offers }
+      end
+
+      post "/" do
+        session["id"] = REPO.put fetch_offers
+        redirect to("/")
       end
 
       private
 
       def fetch_offers
-        Fetcher.new.call
+        if params && !params.empty? && params["uid"]
+          Fetcher.new(params).call
+        else
+          []
+        end
       end
     end
 

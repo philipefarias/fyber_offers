@@ -20,6 +20,9 @@ describe "listing offers" do
     with_no_offers do
       visit "/"
 
+      fill_in "uid", with: 1
+      click_on "Fetch offers"
+
       within "#offers" do
         page.wont_have_css(".offer")
       end
@@ -29,6 +32,9 @@ describe "listing offers" do
   it "shows a list of offers" do
     with_offers do
       visit "/"
+
+      fill_in "uid", with: 1
+      click_on "Fetch offers"
 
       within "#offers" do
         page.must_have_css(".offer", count: 22)
