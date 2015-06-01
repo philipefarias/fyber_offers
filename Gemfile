@@ -13,4 +13,6 @@ group :test do
   gem "capybara_minitest_spec"
   gem "rr", require: false
   gem "timecop"
+  gem "webmock"
+  gem "vcr"
 end

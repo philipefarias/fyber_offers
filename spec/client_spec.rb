@@ -1,5 +1,12 @@
 require "helper"
+require "support/vcr"
 require "client"
+
+VCR.configure do |config|
+  config.default_cassette_options = {
+    match_requests_on: [ :method ]
+  }
+end
 
 describe FyberOffers::Client do
   let(:timestamper) { proc { 1433016415 } }
@@ -63,8 +70,10 @@ describe FyberOffers::Client do
 
   describe "#call" do
     it "returns the response body" do
-      client = new_client url: api_url, key: api_key, params: params
-      client.call.must_be_kind_of Array
+      with_offers any_url: true do
+        client = new_client url: api_url, key: api_key, params: params
+        client.call.must_be_kind_of Array
+      end
     end
   end
 

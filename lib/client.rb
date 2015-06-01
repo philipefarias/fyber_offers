@@ -23,12 +23,13 @@ module FyberOffers
       @locale      = params[:locale]
       @offer_types = params[:offer_types]
 
+      @requester   = options.fetch(:requester,   API::Requester)
       @timestamper = options.fetch(:timestamper, API::Timestamper)
-      @hasher      = options.fetch(:hasher, API::Hasher)
+      @hasher      = options.fetch(:hasher,      API::Hasher)
     end
 
     def call
-      []
+      @requester.new(api_url).call.fetch("offers", [])
     end
 
     def url
