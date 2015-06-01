@@ -1,5 +1,6 @@
 require "helper"
 require "support/vcr"
+require "support/timecop"
 require "client"
 
 VCR.configure do |config|
@@ -79,8 +80,10 @@ describe FyberOffers::Client do
 
   describe "#url" do
     it "returns the request url for json as default" do
-      client = new_client url: api_url, key: api_key, params: params
-      client.url.must_equal "http://api.example.com/offers.json?uid=1&appid=157&device_id=2b6f0cc904d137be&locale=de&hashkey=5ea52bd6029a37c6191feeeebc6e6583e89c7c11"
+      at_a_fixed_time do
+        client = new_client url: api_url, key: api_key, params: params
+        client.url.must_equal "http://api.example.com/offers.json?uid=1&appid=157&device_id=2b6f0cc904d137be&locale=de&timestamp=1433112900&hashkey=37e03692746565c2c8444bf00a9a83f7de24e038"
+      end
     end
   end
 end

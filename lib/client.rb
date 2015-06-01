@@ -31,7 +31,8 @@ module FyberOffers
     end
 
     def call
-      @requester.new(api_url).call.fetch("offers", [])
+      response = @requester.new(url).call
+      response.fetch("offers", [])
     end
 
     def url
@@ -65,7 +66,7 @@ module FyberOffers
     end
 
     def query_values
-      params.map {|k,v| "#{k}=#{v}"}
+      timestamp(params).map {|k,v| "#{k}=#{v}"}
     end
 
     def params
@@ -80,8 +81,8 @@ module FyberOffers
       :json
     end
 
-    def timestamp
-      @timestamper.call
+    def timestamp(hash)
+      hash.tap { |h| h[:timestamp] = @timestamper.call }
     end
 
     def blank?(obj)
