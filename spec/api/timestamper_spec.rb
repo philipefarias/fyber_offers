@@ -1,5 +1,5 @@
 require "helper"
-require "timecop"
+require "support/timecop"
 require "api/timestamper"
 
 describe FyberOffers::API::Timestamper do

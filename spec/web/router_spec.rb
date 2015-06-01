@@ -3,11 +3,11 @@ require "capybara"
 require "capybara_minitest_spec"
 require "web"
 
-describe FyberOffers::Web do
+describe FyberOffers::Web::Router do
   include Capybara::DSL
 
   before do
-    Capybara.app = FyberOffers::Web.new
+    Capybara.app = FyberOffers::Web.app
   end
 
   after do
@@ -17,7 +17,7 @@ describe FyberOffers::Web do
 
   it "shows a message when there's none" do
     fetcher = -> { [] }
-    stub(FyberOffers::Fetcher).new { fetcher }
+    stub(FyberOffers::Web::Fetcher).new { fetcher }
 
     visit "/"
 
@@ -26,7 +26,7 @@ describe FyberOffers::Web do
 
   it "shows a list of offers when there's some" do
     fetcher = -> { [offer] }
-    stub(FyberOffers::Fetcher).new { fetcher }
+    stub(FyberOffers::Web::Fetcher).new { fetcher }
 
     visit "/"
 

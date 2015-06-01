@@ -1,3 +1,3 @@
 require "./lib/web"
 
-run FyberOffers::Web
+run FyberOffers::Web.app

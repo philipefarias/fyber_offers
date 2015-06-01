@@ -8,7 +8,7 @@ describe "listing offers" do
   include Capybara::DSL
 
   before do
-    Capybara.app = FyberOffers::Web.new
+    Capybara.app = FyberOffers::Web.app
   end
 
   after do

@@ -1,7 +1,7 @@
 require "helper"
 require "support/vcr"
 require "support/timecop"
-require "client"
+require "api"
 
 VCR.configure do |config|
   config.default_cassette_options = {
@@ -9,7 +9,7 @@ VCR.configure do |config|
   }
 end
 
-describe FyberOffers::Client do
+describe FyberOffers::API::Client do
   let(:timestamper) { proc { 1433016415 } }
   let(:api_url) { "http://api.example.com/offers" }
   let(:api_key) { "dedb9f9901d4859e5c9b" }
@@ -24,7 +24,7 @@ describe FyberOffers::Client do
   end
 
   def new_client(url:, key:, params:)
-    FyberOffers::Client.new url: url, key: key, params: params
+    FyberOffers::API::Client.new url: url, key: key, params: params
   end
 
   def hash_except(hash, key)
@@ -35,37 +35,37 @@ describe FyberOffers::Client do
     it "returns an error when there's no uid" do
       proc {
         new_client(url: api_url, key: api_key, params: hash_except(params, :uid))
-      }.must_raise FyberOffers::MissingAttributeError
+      }.must_raise FyberOffers::API::Error::MissingAttribute
     end
 
     it "returns an error when there's no device_id" do
       proc {
         new_client(url: api_url, key: api_key, params: hash_except(params, :device_id))
-      }.must_raise FyberOffers::MissingAttributeError
+      }.must_raise FyberOffers::API::Error::MissingAttribute
     end
 
     it "returns an error when there's no locale" do
       proc {
         new_client(url: api_url, key: api_key, params: hash_except(params, :locale))
-      }.must_raise FyberOffers::MissingAttributeError
+      }.must_raise FyberOffers::API::Error::MissingAttribute
     end
 
     it "returns an error when uid is blank" do
       proc {
         new_client(url: api_url, key: api_key, params: params.merge(uid: nil))
-      }.must_raise FyberOffers::MissingAttributeError
+      }.must_raise FyberOffers::API::Error::MissingAttribute
     end
 
     it "returns an error when device_id is blank" do
       proc {
         new_client(url: api_url, key: api_key, params: params.merge(device_id: ""))
-      }.must_raise FyberOffers::MissingAttributeError
+      }.must_raise FyberOffers::API::Error::MissingAttribute
     end
 
     it "returns an error when locale is blank" do
       proc {
         new_client(url: api_url, key: api_key, params: params.merge(locale: ""))
-      }.must_raise FyberOffers::MissingAttributeError
+      }.must_raise FyberOffers::API::Error::MissingAttribute
     end
   end
 

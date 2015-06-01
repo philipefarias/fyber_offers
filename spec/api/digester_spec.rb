@@ -1,5 +1,4 @@
 require "helper"
-require "digest/sha1"
 require "api/digester"
 
 describe FyberOffers::API::Digester do
