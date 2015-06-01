@@ -16,18 +16,20 @@ describe FyberOffers::Web do
   end
 
   it "shows a message when there's none" do
-    visit "/"
-    page.must_have_content "No offers available"
-  end
-
-  it "shows a list of offers when there's some" do
-    fetcher = -> { [{title: "I'm an offer!"}] }
+    fetcher = -> { [] }
     stub(FyberOffers::Fetcher).new { fetcher }
 
     visit "/"
 
-    within "#offers" do
-      page.must_have_content "I'm an offer!"
-    end
+    page.must_have_content "No offers available"
+  end
+
+  it "shows a list of offers when there's some" do
+    fetcher = -> { [{"title" => "I'm an offer!"}] }
+    stub(FyberOffers::Fetcher).new { fetcher }
+
+    visit "/"
+
+    page.must_have_content "I'm an offer!"
   end
 end

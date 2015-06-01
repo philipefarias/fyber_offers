@@ -1,6 +1,7 @@
-require "api/hasher"
-require "api/digester"
-require "api/timestamper"
+require_relative "api/hasher"
+require_relative "api/digester"
+require_relative "api/requester"
+require_relative "api/timestamper"
 
 module FyberOffers
   MissingAttributeError = Class.new(StandardError)
@@ -12,6 +13,7 @@ module FyberOffers
     attr_reader :api_url, :api_key, :uid, :appid, :device_id, :ip, :locale, :offer_types
 
     def initialize(url:, key:, params:, **options)
+      symbolize_keys params
       validate_params_presence params
 
       @api_url     = url
@@ -46,6 +48,12 @@ module FyberOffers
       raise MissingAttributeError, "#{missing.first} cannot be blank" unless missing.empty?
 
       true
+    end
+
+    def symbolize_keys(hash)
+      hash.keys.each do |key|
+        hash[(key.to_sym rescue key) || key] = hash.delete(key)
+      end
     end
 
     def query_params
