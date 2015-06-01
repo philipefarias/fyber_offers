@@ -20,13 +20,24 @@
     <![endif]-->
   </head>
   <body>
+    <h1>Offer Wall</h1>
+    <h2>Listing offers</h2>
     <div id="offers">
       <% if offers.empty? %>
         <p>No offers available</p>
       <% else %>
         <% offers.each do |offer| %>
           <div class="offer">
-            <%= offer["title"] %>
+            <img src="<%= offer["thumbnail"]["lowres"] %>" alt="<%= offer["teaser"] %>"/>
+            <h3><%= offer["title"] %></h3>
+            <p><%= offer["teaser"] %></p>
+            <div class="time-to-payout"><%= "Auszahlung in #{offer["time_to_payout"]["readable"]}" %></div>
+            <div class="action">
+              <div class="offer-type"><%= offer["offer_types"].last["readable"] %></div>
+              <div class="payout-button">
+                <a href="<%= offer["link"] %>"><%= "+ #{offer["payout"]}" %></a>
+              </div>
+            </div>
           </div>
         <% end %>
       <% end %>

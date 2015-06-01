@@ -25,11 +25,25 @@ describe FyberOffers::Web do
   end
 
   it "shows a list of offers when there's some" do
-    fetcher = -> { [{"title" => "I'm an offer!"}] }
+    fetcher = -> { [offer] }
     stub(FyberOffers::Fetcher).new { fetcher }
 
     visit "/"
 
     page.must_have_content "I'm an offer!"
+  end
+
+  let :offer do
+    {
+      "title" => "I'm an offer!",
+      "teaser" => "I'm a teaser",
+      "link" => "example.com/offer",
+      "payout" => 89358,
+      "thumbnail" => { "lowres" => "image.jpg" },
+      "time_to_payout" => { "readable" => "8 minutes" },
+      "offer_types" => [
+        { "readable" => "Free"  }
+      ]
+    }
   end
 end
