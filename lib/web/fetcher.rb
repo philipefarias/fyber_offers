@@ -12,7 +12,7 @@ module FyberOffers
       end
 
       def call
-        client.call api_args
+        client.call(api_args) || []
       end
 
       private
