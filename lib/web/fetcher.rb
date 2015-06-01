@@ -1,31 +1,32 @@
-require "yaml"
-
 module FyberOffers
   module Web
 
     class Fetcher
+      attr_reader :client, :configs
+      attr_accessor :params
+
+      def initialize(params = {}, options: {})
+        @configs = options.fetch(:configs, Web.config(:api))
+        @client  = options.fetch(:client,  Web.api)
+        @params  = conf(:params).to_h.merge params
+      end
+
       def call
-        client.call
+        client.call api_args
       end
 
       private
 
-      def client
-        FyberOffers::API::Client.new url: api(:url),
-          key: api(:key),
-          params: api(:params)
+      def api_args
+        {
+          url: conf(:url),
+          key: conf(:key),
+          params: params
+        }
       end
 
-      def api(key)
-        config[key.to_s]
-      end
-
-      def config
-        @config ||= YAML.load file
-      end
-
-      def file
-        File.read(File.expand_path("../../../api.yml", __FILE__))
+      def conf(key)
+        configs && configs[key.to_s]
       end
     end
 

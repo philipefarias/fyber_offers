@@ -35,4 +35,4 @@ build/
 .rvmrc
 
 # project specific
-api.yml
+config.yml
