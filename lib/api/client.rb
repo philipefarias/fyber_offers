@@ -5,11 +5,10 @@ module FyberOffers
       MANDATORY_PARAMS = [ :uid, :appid, :device_id, :locale ]
       OPTIONAL_PARAMS  = [ :ip, :offer_types ]
 
-      attr_reader :api_url, :api_key, :uid, :appid, :device_id, :ip, :locale, :offer_types
+      attr_accessor :api_url, :api_key, :uid, :appid, :device_id, :ip, :locale, :offer_types
 
       def initialize(url:, key:, params:, **options)
         symbolize_keys params
-        validate_params_presence params
 
         @api_url     = url
         @api_key     = key
@@ -26,8 +25,14 @@ module FyberOffers
       end
 
       def call
-        response = @requester.new(url).call
-        response.fetch("offers", [])
+        if params
+          validate_params_presence params
+
+          response = @requester.new(url).call
+          response.fetch("offers", [])
+        else
+          []
+        end
       end
 
       def url

@@ -34,37 +34,43 @@ describe FyberOffers::API::Client do
   describe "presence validations" do
     it "returns an error when there's no uid" do
       proc {
-        new_client(url: api_url, key: api_key, params: hash_except(params, :uid))
+        client = new_client(url: api_url, key: api_key, params: hash_except(params, :uid))
+        client.call
       }.must_raise FyberOffers::API::Error::MissingAttribute
     end
 
     it "returns an error when there's no device_id" do
       proc {
-        new_client(url: api_url, key: api_key, params: hash_except(params, :device_id))
+        client = new_client(url: api_url, key: api_key, params: hash_except(params, :device_id))
+        client.call
       }.must_raise FyberOffers::API::Error::MissingAttribute
     end
 
     it "returns an error when there's no locale" do
       proc {
-        new_client(url: api_url, key: api_key, params: hash_except(params, :locale))
+        client = new_client(url: api_url, key: api_key, params: hash_except(params, :locale))
+        client.call
       }.must_raise FyberOffers::API::Error::MissingAttribute
     end
 
     it "returns an error when uid is blank" do
       proc {
-        new_client(url: api_url, key: api_key, params: params.merge(uid: nil))
+        client = new_client(url: api_url, key: api_key, params: params.merge(uid: nil))
+        client.call
       }.must_raise FyberOffers::API::Error::MissingAttribute
     end
 
     it "returns an error when device_id is blank" do
       proc {
-        new_client(url: api_url, key: api_key, params: params.merge(device_id: ""))
+        client = new_client(url: api_url, key: api_key, params: params.merge(device_id: ""))
+        client.call
       }.must_raise FyberOffers::API::Error::MissingAttribute
     end
 
     it "returns an error when locale is blank" do
       proc {
-        new_client(url: api_url, key: api_key, params: params.merge(locale: ""))
+        client = new_client(url: api_url, key: api_key, params: params.merge(locale: ""))
+        client.call
       }.must_raise FyberOffers::API::Error::MissingAttribute
     end
   end
