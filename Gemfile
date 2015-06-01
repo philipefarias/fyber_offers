@@ -12,4 +12,5 @@ group :test do
   gem "rack-test"
   gem "capybara_minitest_spec"
   gem "rr", require: false
+  gem "timecop"
 end
