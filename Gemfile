@@ -10,6 +10,7 @@ end
 
 group :test do
   gem "rack-test"
+  gem "minitest-reporters"
   gem "capybara_minitest_spec"
   gem "rr", require: false
   gem "timecop"
