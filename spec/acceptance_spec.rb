@@ -39,7 +39,7 @@ describe "listing offers" do
       within "#offers" do
         page.must_have_css(".offer", count: 22)
 
-        page.must_have_xpath("//img[@src=\"http://cdn1.sponsorpay.com/assets/2690/appleprdodukty_square_60.PNG\"]")
+        page.must_have_xpath("//img[@src=\"http://cdn1.sponsorpay.com/assets/2690/appleprdodukty_square_175.PNG\"]")
         page.must_have_content "Nimm teil und gewinne!"
         page.must_have_content "Nimm mit deinen korrekten Daten am Gewinnspiel teil."
         page.must_have_content "Gratis"
