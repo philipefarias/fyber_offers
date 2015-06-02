@@ -8,6 +8,7 @@ module FyberOffers
         enable :sessions
         set :views, settings.root + '/templates'
         set :erb, escape_html: true
+        set :scss, style: :compressed, debug_info: false
       end
 
       get "/" do
@@ -18,6 +19,11 @@ module FyberOffers
       post "/" do
         session["id"] = REPO.put fetch_offers
         redirect to("/")
+      end
+
+      get "/css/:name.css" do |name|
+        content_type :css
+        scss "css/#{name}".to_sym, :layout => false
       end
 
       private

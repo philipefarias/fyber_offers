@@ -3,6 +3,7 @@ ruby "2.2.2"
 
 gem "rake"
 gem "sinatra"
+gem "sass"
 
 group :development do
   gem "pry"

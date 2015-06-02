@@ -14,56 +14,77 @@
     <meta http-equiv="Expires" content="Tue, 01 Jan 1980 1:00:00 GMT">
     <meta http-equiv="Pragma" content="no-cache">
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" href="/css/app.css" media="screen,projection" type="text/css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    </head>
   </head>
   <body>
-    <h1>Offer Wall</h1>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo center">Offer Wall</a>
+      </div>
+    </nav>
 
-    <h2>Fetch offers</h2>
-    <div>
-      <form accept-charset="UTF-8" action="/" method="post">
-        <div class="field">
-          <label for="uid">uid</label>
-          <input type="text" id="uid" name="uid">
-        </div>
+      <div class="row">
+        <div class="col s12 m4 l3">
 
-        <div class="field">
-          <label for="pub0">pub0</label>
-          <input type="text" id="pub0" name="pub0">
-        </div>
-
-        <div class="field">
-          <label for="page">page</label>
-          <input type="text" id="page" name="page">
-        </div>
-
-        <input type="submit" name="commit" value="Fetch offers">
-      </form>
-    </div>
-
-    <h2>Listing offers</h2>
-    <div id="offers">
-      <% if offers.empty? %>
-        <p>No offers available</p>
-      <% else %>
-        <% offers.each do |offer| %>
-          <div class="offer">
-            <img src="<%= offer["thumbnail"]["lowres"] %>" alt="<%= offer["teaser"] %>"/>
-            <h3><%= offer["title"] %></h3>
-            <p><%= offer["teaser"] %></p>
-            <div class="time-to-payout"><%= "Auszahlung in #{offer["time_to_payout"]["readable"]}" %></div>
-            <div class="action">
-              <div class="offer-type"><%= offer["offer_types"].last["readable"] %></div>
-              <div class="payout-button">
-                <a href="<%= offer["link"] %>"><%= "+ #{offer["payout"]}" %></a>
+          <div>
+            <form accept-charset="UTF-8" action="/" method="post">
+              <div class="input-field">
+                <input type="text" id="uid" name="uid" class="validate">
+                <label for="uid">uid</label>
               </div>
-            </div>
+
+              <div class="input-field">
+                <input type="text" id="pub0" name="pub0" class="validate">
+                <label for="pub0">pub0</label>
+              </div>
+
+              <div class="input-field">
+                <input type="text" id="page" name="page" class="validate">
+                <label for="page">page</label>
+              </div>
+
+              <button class="btn waves-effect waves-light" type="submit" name="action">Fetch offers
+                <i class="mdi-content-send right"></i>
+              </button>
+            </form>
           </div>
-        <% end %>
-      <% end %>
-    </div>
-  </body>
-</html>
+        </div>
+
+        <div id="offers" class="col s12 m8 l9 valign-wrapper">
+          <div class="row">
+            <% if offers.empty? %>
+              <h5 class="valign">No offers available</h5>
+            <% else %>
+              <% offers.each do |offer| %>
+                <div class="col s12 m4 offer">
+                  <div class="card medium">
+                    <div class="card-image">
+                      <img src="<%= offer["thumbnail"]["hires"] %>" alt="<%= offer["teaser"] %>"/>
+                      <span class="card-title"><%= offer["title"] %></span>
+                    </div>
+                    <div class="card-content">
+                      <p><%= offer["teaser"] %></p>
+                    </div>
+                    <div class="card-action">
+                      <div>
+                        <a href="<%= offer['link'] %>" class="waves-effect waves-light btn"><%= "+ #{offer['payout']}" %></a>
+                        <span class="badge offer-type"><%= offer["offer_types"].last["readable"] %></span>
+                      </div>
+                      <span class="badge time-to-payout">
+                        <i class="mdi-image-timer"></i>
+                        <%= "#{offer["time_to_payout"]["readable"]}" %>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+    </body>
+  </html>
