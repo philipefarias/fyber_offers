@@ -1,5 +1,3 @@
-require "json"
-
 module FyberOffers
   module API
 
@@ -19,9 +17,9 @@ module FyberOffers
 
       def call(params)
         if params
-          url = build_url(params)
-          response = JSON.parse @requester.new(url).call
-          response.fetch("offers", [])
+          url = build_url_with(params)
+          response = @requester.new(url).call
+          response.body.fetch("offers", [])
         else
           []
         end
@@ -29,11 +27,11 @@ module FyberOffers
 
       private
 
-      def build_url(params)
-        "#{api_url}.#{format}?#{query_string(params)}"
+      def build_url_with(params)
+        "#{api_url}.#{format}?#{query_string_for(params)}"
       end
 
-      def query_string(params)
+      def query_string_for(params)
         request_params = RequestParams.new(params).delete_blanks
         request_params.assert_keys_presence(MANDATORY_PARAMS)
         request_params.assert_values_presence

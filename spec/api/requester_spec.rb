@@ -3,15 +3,25 @@ require "lib/api/requester"
 
 describe FyberOffers::API::Requester do
   class HTTPDummy
-    def self.get(uri)
+    def self.get(_)
       "body content"
     end
   end
 
-  it "gets the uri" do
-    url  = "http://www.example.com"
+  class DummyResponse < Struct.new(:body)
+  end
 
-    requester = FyberOffers::API::Requester.new url, http_client: HTTPDummy
-    requester.call.must_equal "body content"
+  let :requester do
+    FyberOffers::API::Requester.new "http://www.example.com",
+                                    http_client: HTTPDummy,
+                                    response_handler: DummyResponse
+  end
+
+  let :dummy_response do
+    DummyResponse.new "body content"
+  end
+
+  it "gets the uri and wraps the response" do
+    requester.call.must_equal dummy_response
   end
 end
