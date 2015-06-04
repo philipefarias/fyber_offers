@@ -16,7 +16,8 @@ module FyberOffers
     module_function :app
 
     def api
-      -> (args) { FyberOffers::API::Client.new(args).call }
+      conf = config :api
+      FyberOffers::API::Client.new url: conf["url"], key: conf["key"]
     end
     module_function :api
 

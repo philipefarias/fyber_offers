@@ -2,20 +2,16 @@ require "helper"
 require "web"
 
 describe FyberOffers::Web::Fetcher do
-  let(:api_conf) do
-    { "url" => "example.com", "key" => "random", "params" => {} }
-  end
-
   def new_fetcher(params = {})
     FyberOffers::Web::Fetcher.new params, options: {
       client: fake_client,
-      configs: api_conf
+      configs: {}
     }
   end
 
   describe "when there is a response" do
     let(:fake_client) do
-      -> (args) { args[:params].empty? ? ["default offer"] : ["custom offer"] }
+      -> (args) { args.empty? ? ["default offer"] : ["custom offer"] }
     end
 
     it "fetches offers with config params" do
@@ -29,7 +25,7 @@ describe FyberOffers::Web::Fetcher do
 
   describe "when there isn't a response" do
     let(:fake_client) do
-      -> (args) { }
+      -> (_) { }
     end
 
     it "returns an empty collection" do

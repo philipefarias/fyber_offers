@@ -1,25 +1,19 @@
 require "net/http"
-require "json"
 require "uri"
 
 module FyberOffers
   module API
 
     class Requester
-      attr_reader :url
+      attr_reader :url, :http_client
 
-      def initialize(url)
-        @url = url
+      def initialize(url, http_client: Net::HTTP)
+        @url         = url
+        @http_client = http_client
       end
 
       def call
-        JSON.parse get(url)
-      end
-
-      private
-
-      def get(url)
-        Net::HTTP.get URI(url)
+        http_client.get URI(url)
       end
     end
 

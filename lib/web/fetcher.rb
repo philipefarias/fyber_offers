@@ -8,25 +8,17 @@ module FyberOffers
       def initialize(params = {}, options: {})
         @configs = options.fetch(:configs, Web.config(:api))
         @client  = options.fetch(:client,  Web.api)
-        @params  = conf(:params).to_h.merge params
+        @params  = default_params.merge params
       end
 
       def call
-        client.call(api_args) || []
+        client.call(params) || []
       end
 
       private
 
-      def api_args
-        {
-          url: conf(:url),
-          key: conf(:key),
-          params: params
-        }
-      end
-
-      def conf(key)
-        configs && configs[key.to_s]
+      def default_params
+        configs["params"].to_h
       end
     end
 
