@@ -1,4 +1,5 @@
-require "helper"
+require_relative "../helper"
+require "lib/api/request_params"
 
 describe FyberOffers::API::RequestParams do
   let(:params) { {"uid" => 1, "appid" => 157} }

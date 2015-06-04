@@ -1,5 +1,5 @@
-require "helper"
-require "api/requester"
+require_relative "../helper"
+require "lib/api/requester"
 
 describe FyberOffers::API::Requester do
   class HTTPDummy

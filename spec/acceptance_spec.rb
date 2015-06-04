@@ -1,8 +1,7 @@
-require "helper"
-require "capybara"
-require "capybara_minitest_spec"
-require "support/vcr"
-require "web"
+require_relative "helper"
+require_relative "support/vcr"
+require_relative "support/capybara"
+require "lib/web"
 
 describe "listing offers" do
   include Capybara::DSL

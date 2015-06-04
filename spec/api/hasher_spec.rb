@@ -1,5 +1,5 @@
-require "helper"
-require "api/hasher"
+require_relative "../helper"
+require "lib/api/hasher"
 
 describe FyberOffers::API::Hasher do
   it "calculates the hashkey" do

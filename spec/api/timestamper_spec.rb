@@ -1,6 +1,6 @@
-require "helper"
-require "support/timecop"
-require "api/timestamper"
+require_relative "../helper"
+require_relative "../support/timecop"
+require "lib/api/timestamper"
 
 describe FyberOffers::API::Timestamper do
   it "returns an unix timestamp" do

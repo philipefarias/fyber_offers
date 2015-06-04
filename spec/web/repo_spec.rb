@@ -1,5 +1,5 @@
-require "helper"
-require "web/repo"
+require_relative "../helper"
+require "lib/web/repo"
 
 describe FyberOffers::Web::Repo do
   let(:repo) { FyberOffers::Web::Repo.new }

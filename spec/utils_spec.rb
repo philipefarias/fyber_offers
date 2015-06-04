@@ -1,5 +1,5 @@
-require "helper"
-require "utils"
+require_relative "helper"
+require "lib/utils"
 
 using FyberOffers::Utils
 

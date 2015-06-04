@@ -1,6 +1,6 @@
-require "helper"
-require "support/vcr"
-require "api"
+require_relative "../helper"
+require_relative "../support/vcr"
+require "lib/api"
 
 using FyberOffers::Utils
 

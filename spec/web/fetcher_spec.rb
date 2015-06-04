@@ -1,5 +1,5 @@
-require "helper"
-require "web"
+require_relative "../helper"
+require "lib/web/fetcher"
 
 describe FyberOffers::Web::Fetcher do
   def new_fetcher(params = {})

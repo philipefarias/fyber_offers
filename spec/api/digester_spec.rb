@@ -1,5 +1,5 @@
-require "helper"
-require "api/digester"
+require_relative "../helper"
+require "lib/api/digester"
 
 describe FyberOffers::API::Digester do
   it "encodes a string with SHA1" do

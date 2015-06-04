@@ -1,7 +1,6 @@
-require "helper"
-require "capybara"
-require "capybara_minitest_spec"
-require "web"
+require_relative "../helper"
+require_relative "../support/capybara"
+require "lib/web"
 
 describe FyberOffers::Web::Router do
   include Capybara::DSL
@@ -45,9 +44,5 @@ describe FyberOffers::Web::Router do
 
       page.must_have_content "I'm an offer!"
     end
-  end
-
-  describe "POST '/'" do
-    it "renders the index"
   end
 end
