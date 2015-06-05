@@ -16,14 +16,14 @@ describe FyberOffers::Web::Router do
 
   let :offer do
     {
-      "title" => "I'm an offer!",
-      "teaser" => "I'm a teaser",
-      "link" => "example.com/offer",
-      "payout" => 89358,
-      "thumbnail" => { "lowres" => "image.jpg" },
-      "time_to_payout" => { "readable" => "8 minutes" },
-      "offer_types" => [
-        { "readable" => "Free"  }
+      :title => "I'm an offer!",
+      :teaser => "I'm a teaser",
+      :link => "example.com/offer",
+      :payout => 89358,
+      :thumbnail => { :lowres => "image.jpg" },
+      :time_to_payout => { :readable => "8 minutes" },
+      :offer_types => [
+        { :readable => "Free"  }
       ]
     }
   end

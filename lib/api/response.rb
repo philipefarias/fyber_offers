@@ -16,26 +16,26 @@ module FyberOffers
 
         assert_is_valid
 
-        @code    = @body["code"]
-        @message = @body["message"]
-        @count   = Integer(@body["count"])
-        @pages   = Integer(@body["pages"])
+        @code    = @body[:code]
+        @message = @body[:message]
+        @count   = Integer(@body[:count])
+        @pages   = Integer(@body[:pages])
       end
 
       private
 
       def parse(content)
-        JSON.parse content
+        JSON.parse content, symbolize_names: true
       end
 
       def assert_is_valid
         raise Error::InvalidResponse if code_is_blank?
 
-        validate_code body["code"]
+        validate_code body[:code]
       end
 
       def code_is_blank?
-        body.blank? || body["code"].blank?
+        body.blank? || body[:code].blank?
       end
 
       def validate_code(code)

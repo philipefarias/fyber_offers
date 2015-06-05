@@ -16,7 +16,7 @@ describe FyberOffers::API::Response do
 
   describe "#body" do
     it "returns parsed json" do
-      response.body.must_equal "code" => "OK", "message" => "OK!", "count" => "43", "pages" => "2"
+      response.body.must_equal code: "OK", message: "OK!", count: "43", pages: "2"
     end
   end
 

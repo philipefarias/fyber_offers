@@ -19,7 +19,7 @@ module FyberOffers
         if params
           url = build_url_with(params)
           response = @requester.new(url).call
-          response.body.fetch("offers", [])
+          response.body.fetch(:offers, [])
         else
           []
         end
