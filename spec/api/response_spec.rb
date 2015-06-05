@@ -21,8 +21,8 @@ describe FyberOffers::API::Response do
   end
 
   describe "#code" do
-    it "returns the response code" do
-      response.code.must_equal "OK"
+    it "returns parsed response code" do
+      response.code.must_equal :ok
     end
   end
 
@@ -33,13 +33,13 @@ describe FyberOffers::API::Response do
   end
 
   describe "#count" do
-    it "returns the response pages number" do
+    it "returns parsed response count number" do
       response.count.must_equal 43
     end
   end
 
   describe "#pages" do
-    it "returns the response pages number" do
+    it "returns parsed response pages number" do
       response.pages.must_equal 2
     end
   end
