@@ -7,11 +7,41 @@ describe FyberOffers::API::Response do
   end
 
   let :json_response do
-    %{{ "code" : "OK" }}
+    %{{ "code" : "OK", "message" : "OK!", "count" : "43", "pages" : "2" }}
   end
 
   def new_response(json)
     FyberOffers::API::Response.new json
+  end
+
+  describe "#body" do
+    it "returns parsed json" do
+      response.body.must_equal "code" => "OK", "message" => "OK!", "count" => "43", "pages" => "2"
+    end
+  end
+
+  describe "#code" do
+    it "returns the response code" do
+      response.code.must_equal "OK"
+    end
+  end
+
+  describe "#message" do
+    it "returns the response message" do
+      response.message.must_equal "OK!"
+    end
+  end
+
+  describe "#count" do
+    it "returns the response pages number" do
+      response.count.must_equal 43
+    end
+  end
+
+  describe "#pages" do
+    it "returns the response pages number" do
+      response.pages.must_equal 2
+    end
   end
 
   describe "parsing response" do
@@ -99,11 +129,5 @@ describe FyberOffers::API::Response do
       }.must_raise FyberOffers::API::Error::UnknownCode
     end
 
-  end
-
-  describe "#body" do
-    it "returns parsed json" do
-      response.body.must_equal "code" => "OK"
-    end
   end
 end

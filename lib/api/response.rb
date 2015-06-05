@@ -6,13 +6,20 @@ module FyberOffers
   module API
 
     class Response
-      attr_reader :raw, :body, :code
+      OK_CODES = %w(OK NO_CONTENT)
+
+      attr_reader :raw, :body, :code, :message, :count, :pages
 
       def initialize(raw)
-        @raw = raw
+        @raw  = raw
         @body = parse raw
 
         assert_is_valid
+
+        @code    = @body["code"]
+        @message = @body["message"]
+        @count   = Integer(@body["count"])
+        @pages   = Integer(@body["pages"])
       end
 
       private
@@ -39,7 +46,7 @@ module FyberOffers
       end
 
       def ok?(code)
-        [ "OK", "NO_CONTENT" ].include? code
+        OK_CODES.include? code
       end
 
       def response_errors
