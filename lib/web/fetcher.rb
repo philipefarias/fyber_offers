@@ -1,3 +1,5 @@
+using FyberOffers::Utils
+
 module FyberOffers
   module Web
 
@@ -5,10 +7,11 @@ module FyberOffers
       attr_reader :client, :configs
       attr_accessor :params
 
-      def initialize(params = {}, options: {})
+      def initialize(params = {})
+        options  = params.delete(:options) || {}
         @configs = options.fetch(:configs, Web.config(:api))
         @client  = options.fetch(:client,  Web.api)
-        @params  = default_params.merge params
+        @params  = default_params.merge params.select {|_,v| v.present?}
       end
 
       def call

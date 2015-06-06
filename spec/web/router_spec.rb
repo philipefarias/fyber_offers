@@ -1,17 +1,11 @@
 require_relative "../helper"
-require_relative "../support/capybara"
 require "lib/web"
 
 describe FyberOffers::Web::Router do
-  include Capybara::DSL
+  include Rack::Test::Methods
 
-  before do
-    Capybara.app = FyberOffers::Web.app
-  end
-
-  after do
-    Capybara.reset_sessions!
-    Capybara.use_default_driver
+  let :app do
+    FyberOffers::Web.app
   end
 
   let :offer do
@@ -29,20 +23,22 @@ describe FyberOffers::Web::Router do
   end
 
   describe "GET '/'" do
-    it "shows a message when there's none" do
-      stub(FyberOffers::Web::REPO).get { [] }
+    it "shows a message saying there's no offers" do
+      get "/"
 
-      visit "/"
-
-      page.must_have_content "No offers available"
+      last_response.body.must_have_content "No offers available"
     end
+  end
 
+  describe "POST '/'" do
     it "shows a list of offers when there's some" do
-      stub(FyberOffers::Web::REPO).get { [offer] }
+      stub.proxy(FyberOffers::Web::OffersForm).new do |obj|
+        stub(obj).submit { [offer] }
+      end
 
-      visit "/"
+      post "/", uid: 1
 
-      page.must_have_content "I'm an offer!"
+      last_response.body.must_have_content "I'm an offer!"
     end
   end
 end

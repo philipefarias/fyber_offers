@@ -1,0 +1,12 @@
+<form accept-charset="UTF-8" action="/" method="post">
+  <% form.inputs.each do |input| %>
+      <div class="input-field">
+        <input type="<%= input.type %>" id="<%= input.name %>" name="<%= input.name %>" value="<%= input.value %>" <%= "required" if input.required %>>
+        <label for="<%= input.name %>"><%= input.name %></label>
+      </div>
+  <% end %>
+
+  <button class="btn waves-effect waves-light" type="submit" name="action">Fetch offers
+    <i class="mdi-content-send right"></i>
+  </button>
+</form>

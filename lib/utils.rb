@@ -79,5 +79,11 @@ module FyberOffers
       end
     end
 
+    refine String do
+      def number?
+        !!match(/\A\d+\z/)
+      end
+    end
+
   end
 end

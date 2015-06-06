@@ -106,3 +106,29 @@ describe "Hash#symbolize_keys!" do
     original.must_equal expected
   end
 end
+
+describe "String#number?" do
+  it "returns true if there are only digits" do
+    "1234".number?.must_equal true
+  end
+
+  it "returns false if there is empty" do
+    "".number?.must_equal false
+  end
+
+  it "returns false if there are letters" do
+    "12abc".number?.must_equal false
+  end
+
+  it "returns false if there is a plus sign" do
+    "+1".number?.must_equal false
+  end
+
+  it "returns false if there is a minus sign" do
+    "-1".number?.must_equal false
+  end
+
+  it "returns false if there is a symbol" do
+    "1!".number?.must_equal false
+  end
+end

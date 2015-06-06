@@ -1,4 +1,5 @@
 require_relative "api"
+require_relative "web/offers_form"
 require_relative "web/fetcher"
 require_relative "web/router"
 require_relative "web/repo"

@@ -3,10 +3,10 @@ require "lib/web/fetcher"
 
 describe FyberOffers::Web::Fetcher do
   def new_fetcher(params = {})
-    FyberOffers::Web::Fetcher.new params, options: {
+    FyberOffers::Web::Fetcher.new params.merge(options: {
       client: fake_client,
       configs: {}
-    }
+    })
   end
 
   describe "when there is a response" do
