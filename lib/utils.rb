@@ -43,6 +43,16 @@ module FyberOffers
       def blank?() self == // end
     end
 
+    refine Array do
+      def extract_options
+        last.is_a?(::Hash) ? last : {}
+      end
+
+      def extract_options!
+        last.is_a?(::Hash) ? pop : {}
+      end
+    end
+
     refine Hash do
       def except(*keys)
         dup.except!(*keys)

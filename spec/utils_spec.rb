@@ -21,6 +21,46 @@ describe "Object#blank?" do
   end
 end
 
+describe "Array#extract_options" do
+  it "returns the last element if its a hash" do
+    array   = [:a, :b, c: { d: "e"}]
+
+    options = array.extract_options
+
+    array.must_equal [:a, :b, c: { d: "e"}]
+    options.must_equal c: { d: "e" }
+  end
+
+  it "returns a blank hash if last element isn't a hash" do
+    array   = [:a, :b, :c]
+
+    options = array.extract_options
+
+    array.must_equal [:a, :b, :c]
+    options.must_equal Hash.new
+  end
+end
+
+describe "Array#extract_options!" do
+  it "removes and returns the last element if its a hash" do
+    array   = [:a, :b, c: { d: "e"}]
+
+    options = array.extract_options!
+
+    array.must_equal [:a, :b ]
+    options.must_equal c: { d: "e" }
+  end
+
+  it "returns a blank hash if last element isn't a hash" do
+    array   = [:a, :b, :c]
+
+    options = array.extract_options!
+
+    array.must_equal [:a, :b, :c]
+    options.must_equal Hash.new
+  end
+end
+
 describe "Hash#except" do
   it "returns a hash without given keys" do
     original = { a: "b", c: "d", e: "f" }
