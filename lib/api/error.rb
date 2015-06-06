@@ -1,22 +1,20 @@
 module FyberOffers
   module API
+    Error  = Class.new(StandardError)
 
-    module Error
-      MissingAttribute  = Class.new(StandardError)
-      InvalidResponse   = Class.new(StandardError)
-      InvalidPage       = Class.new(StandardError)
-      InvalidAppid      = Class.new(StandardError)
-      InvalidUid        = Class.new(StandardError)
-      InvalidHashkey    = Class.new(StandardError)
-      InvalidDeviceId   = Class.new(StandardError)
-      InvalidIp         = Class.new(StandardError)
-      InvalidTimestamp  = Class.new(StandardError)
-      InvalidLocale     = Class.new(StandardError)
-      InvalidAndroidId  = Class.new(StandardError)
-      InvalidCategory   = Class.new(StandardError)
-      RemoteServerError = Class.new(StandardError)
-      UnknownCode       = Class.new(StandardError)
-    end
-
+    MissingAttribute  = Class.new(Error)
+    InvalidResponse   = Class.new(Error)
+    InvalidPage       = Class.new(Error)
+    InvalidAppid      = Class.new(Error)
+    InvalidUid        = Class.new(Error)
+    InvalidHashkey    = Class.new(Error)
+    InvalidDeviceId   = Class.new(Error)
+    InvalidIp         = Class.new(Error)
+    InvalidTimestamp  = Class.new(Error)
+    InvalidLocale     = Class.new(Error)
+    InvalidAndroidId  = Class.new(Error)
+    InvalidCategory   = Class.new(Error)
+    RemoteServerError = Class.new(Error)
+    UnknownCode       = Class.new(Error)
   end
 end

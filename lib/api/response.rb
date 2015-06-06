@@ -31,7 +31,7 @@ module FyberOffers
       end
 
       def assert_is_valid
-        raise Error::InvalidResponse if code_is_blank?
+        raise InvalidResponse if code_is_blank?
 
         validate_code body[:code]
       end
@@ -60,7 +60,7 @@ module FyberOffers
 
       def raise_error(error_string)
         camelized = error_string.gsub(/(?:^|_)([a-z])/) { $1.upcase }
-        raise Error.const_get(camelized)
+        raise API.const_get(camelized)
       end
     end
 

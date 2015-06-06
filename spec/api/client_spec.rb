@@ -22,37 +22,37 @@ describe FyberOffers::API::Client do
     it "returns an error when there's no uid" do
       proc {
         client.call params.except(:uid)
-      }.must_raise FyberOffers::API::Error::MissingAttribute
+      }.must_raise FyberOffers::API::MissingAttribute
     end
 
     it "returns an error when there's no device_id" do
       proc {
         client.call params.except(:device_id)
-      }.must_raise FyberOffers::API::Error::MissingAttribute
+      }.must_raise FyberOffers::API::MissingAttribute
     end
 
     it "returns an error when there's no locale" do
       proc {
         client.call params.except(:locale)
-      }.must_raise FyberOffers::API::Error::MissingAttribute
+      }.must_raise FyberOffers::API::MissingAttribute
     end
 
     it "returns an error when uid is blank" do
       proc {
         client.call params.merge(uid: nil)
-      }.must_raise FyberOffers::API::Error::MissingAttribute
+      }.must_raise FyberOffers::API::MissingAttribute
     end
 
     it "returns an error when device_id is blank" do
       proc {
         client.call params.merge(device_id: "")
-      }.must_raise FyberOffers::API::Error::MissingAttribute
+      }.must_raise FyberOffers::API::MissingAttribute
     end
 
     it "returns an error when locale is blank" do
       proc {
         client.call params.merge(locale: "")
-      }.must_raise FyberOffers::API::Error::MissingAttribute
+      }.must_raise FyberOffers::API::MissingAttribute
     end
   end
 

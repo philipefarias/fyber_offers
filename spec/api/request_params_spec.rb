@@ -33,7 +33,7 @@ describe FyberOffers::API::RequestParams do
     it "returns an error when there is a key missing" do
       proc {
         request_params.assert_keys_presence :uid, :locale
-      }.must_raise FyberOffers::API::Error::MissingAttribute
+      }.must_raise FyberOffers::API::MissingAttribute
     end
 
     it "returns true when there isn't a key missing" do
@@ -50,7 +50,7 @@ describe FyberOffers::API::RequestParams do
       proc {
         request_params = FyberOffers::API::RequestParams.new uid: 1, appid: 157, locale: ""
         request_params.assert_values_presence
-      }.must_raise FyberOffers::API::Error::MissingAttribute
+      }.must_raise FyberOffers::API::MissingAttribute
     end
 
     it "returns true when there isn't a blank value" do
