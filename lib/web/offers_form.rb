@@ -23,7 +23,6 @@ module FyberOffers
       end
 
       def submit
-        assign_input_values
         validate_input_values
 
         errors.blank? ? fetch_offers : []
