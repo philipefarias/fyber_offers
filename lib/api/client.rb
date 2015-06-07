@@ -1,3 +1,5 @@
+using FyberOffers::Utils
+
 module FyberOffers
   module API
 
@@ -16,6 +18,8 @@ module FyberOffers
       end
 
       def call(params)
+        validate_url_and_key
+
         if params
           response = @requester.call query_params(params)
           response.body.fetch(:offers, [])
@@ -25,6 +29,12 @@ module FyberOffers
       end
 
       private
+
+      def validate_url_and_key
+        raise MissingAPIUrl unless api_url.present?
+        raise MissingAPIKey unless api_key.present?
+        true
+      end
 
       def base_url
         "#{api_url}.#{format}"

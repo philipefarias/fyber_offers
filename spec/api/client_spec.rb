@@ -19,6 +19,20 @@ describe FyberOffers::API::Client do
   end
 
   describe "presence validations" do
+    it "returns an error when there's no api url" do
+      proc {
+        client.api_url = ""
+        client.call params
+      }.must_raise FyberOffers::API::MissingAPIUrl
+    end
+
+    it "returns an error when there's no api key" do
+      proc {
+        client.api_key = ""
+        client.call params
+      }.must_raise FyberOffers::API::MissingAPIKey
+    end
+
     it "returns an error when there's no uid" do
       proc {
         client.call params.except(:uid)

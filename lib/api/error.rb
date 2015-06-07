@@ -2,6 +2,8 @@ module FyberOffers
   module API
     Error  = Class.new(StandardError)
 
+    MissingAPIUrl     = Class.new(Error)
+    MissingAPIKey     = Class.new(Error)
     MissingAttribute  = Class.new(Error)
     InvalidResponse   = Class.new(Error)
     InvalidPage       = Class.new(Error)
