@@ -1,0 +1,11 @@
+nav {
+    margin-bottom: 40px;
+}
+
+.messages {
+    visibility: hidden;
+}
+
+.message i {
+    margin-right: .2em;
+}
