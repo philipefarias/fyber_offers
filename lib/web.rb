@@ -2,10 +2,14 @@ require_relative "api"
 require_relative "web/offers_form"
 require_relative "web/fetcher"
 require_relative "web/router"
+require "dotenv"
 require "yaml"
 
 module FyberOffers
   module Web
+
+    Dotenv.load
+
     CONFIG_FILE_PATH = File.expand_path("../../config.yml", __FILE__)
     CONFIG = YAML.load File.read(CONFIG_FILE_PATH)
 
@@ -15,8 +19,9 @@ module FyberOffers
     module_function :app
 
     def api
-      conf = config :api
-      FyberOffers::API::Client.new url: conf["url"], key: conf["key"]
+      url = config :api_url
+      key = ENV["API_KEY"]
+      FyberOffers::API::Client.new url: url, key: key
     end
     module_function :api
 

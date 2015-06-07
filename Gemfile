@@ -5,6 +5,10 @@ gem "rake"
 gem "sinatra"
 gem "curb"
 
+group :development, :test do
+  gem "dotenv"
+end
+
 group :development do
   gem "pry"
 end

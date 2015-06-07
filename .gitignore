@@ -35,5 +35,5 @@ build/
 .rvmrc
 
 # project specific
-config.yml
+.env
 /.sass-cache/
