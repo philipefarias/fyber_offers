@@ -3,7 +3,7 @@ require "lib/api/requester"
 
 describe FyberOffers::API::Requester do
   class HTTPDummy
-    def self.get(_)
+    def get(_)
       "body content"
     end
   end
@@ -22,6 +22,7 @@ describe FyberOffers::API::Requester do
   end
 
   it "gets the uri and wraps the response" do
-    requester.call.must_equal dummy_response
+    params = {uid: 1}
+    requester.call(params).must_equal dummy_response
   end
 end

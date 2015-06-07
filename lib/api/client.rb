@@ -10,15 +10,14 @@ module FyberOffers
         @api_url     = url
         @api_key     = key
 
-        @requester   = options.fetch(:requester,   Requester)
+        @requester   = options.fetch(:requester,   Requester).new(base_url)
         @timestamper = options.fetch(:timestamper, Timestamper)
         @hasher      = options.fetch(:hasher,      Hasher)
       end
 
       def call(params)
         if params
-          url = build_url_with(params)
-          response = @requester.new(url).call
+          response = @requester.call query_params(params)
           response.body.fetch(:offers, [])
         else
           []
@@ -27,17 +26,17 @@ module FyberOffers
 
       private
 
-      def build_url_with(params)
-        "#{api_url}.#{format}?#{query_string_for(params)}"
+      def base_url
+        "#{api_url}.#{format}"
       end
 
-      def query_string_for(params)
+      def query_params(params)
         request_params = RequestParams.new(params).delete_blanks
         request_params.assert_keys_presence(MANDATORY_PARAMS)
         request_params.assert_values_presence
         request_params[:timestamp] = timestamp
         request_params[:hashkey]   = hashkey_for request_params.to_a
-        request_params.to_s
+        request_params
       end
 
       def hashkey_for(query_values)

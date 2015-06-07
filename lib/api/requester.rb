@@ -5,16 +5,16 @@ module FyberOffers
   module API
 
     class Requester
-      attr_reader :url, :response_handler, :http_client
+      attr_reader :base_url, :response_handler, :http_client
 
-      def initialize(url, response_handler: Response, http_client: Net::HTTP)
-        @url         = url
-        @http_client = http_client
+      def initialize(base_url, response_handler: Response, http_client: CurbAdapter)
+        @base_url         = base_url
         @response_handler = response_handler
+        @http_client      = http_client.new
       end
 
-      def call
-        response_from get_url
+      def call(params)
+        response_from get(params)
       end
 
       private
@@ -23,8 +23,12 @@ module FyberOffers
         response_handler.new response_body
       end
 
-      def get_url
-        http_client.get URI(url)
+      def get(params)
+        http_client.get url_for(params)
+      end
+
+      def url_for(params)
+        "#{base_url}?#{params}"
       end
     end
 
