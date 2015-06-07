@@ -5,6 +5,7 @@ gem "rake"
 gem "sinatra"
 gem "curb"
 gem "dotenv"
+gem "thin"
 
 group :development do
   gem "pry"

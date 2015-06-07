@@ -23,11 +23,11 @@ Inform your API key and edit config.yml for the API url and default params:
 
 Start the web server (any rack compatible should do):
 
-    $ rackup
+    $ bundle exec thin start
     
-And finally open it in the browser. For Webrick (on OSX) this should open it:
+And finally open it in the browser. For Thin (on OSX) this should open it:
 
-    $ open http://localhost:9292
+    $ open http://localhost:3000
 
 ## Design notes
 
