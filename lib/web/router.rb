@@ -7,7 +7,6 @@ module FyberOffers
 
     class Router < Sinatra::Base
       configure do
-        enable :sessions
         set :views, settings.root + '/templates'
         set :erb, escape_html: true
       end
