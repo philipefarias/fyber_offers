@@ -1,4 +1,4 @@
-# fyber_offers
+# fyber_offers [![Build Status](https://semaphoreci.com/api/v1/projects/3e1ef652-36a4-47cd-9233-68848cbaa00d/445255/badge.svg)](https://semaphoreci.com/philipefarias/fyber_offers)
 Web app that consumes the Fyber Offer API and renders its responses.
 
 ## Instructions to run
