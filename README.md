@@ -1,6 +1,34 @@
 # fyber_offers
 Web app that consumes the Fyber Offer API and renders its responses.
 
+## Instructions to run
+First make sure all the dependencies are installed. This are the main ones:
+
+- Ruby 2.2.2
+- Bundler
+
+Then install the rest using bundler:
+
+    $ bundle
+
+After that, make sure all the tests are passing:
+
+    $ rake
+
+Inform your API key and edit config.yml for the API url and default params:
+
+    $ cp .env.sample .env
+    $ <editor_of_choice> .env
+    $ <editor_of_choice> config.yml
+
+Start the web server (any rack compatible should do):
+
+    $ rackup
+    
+And finally open it in the browser. For Webrick (on OSX) this should open it:
+
+    $ open http://localhost:9292
+
 ## Design notes
 
 ### Spike
