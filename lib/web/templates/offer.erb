@@ -1,25 +1,25 @@
 <div class="col s12 m4 offer">
 
-  <div class="card medium">
-    <div class="card-image">
-      <img src="<%= offer[:thumbnail][:hires] %>" alt="<%= offer[:teaser] %>"/>
-      <span class="card-title"><%= offer[:title] %></span>
-    </div>
+    <div class="card medium">
+        <div class="card-image">
+            <img src="<%= offer[:thumbnail][:hires] %>" alt="<%= offer[:teaser] %>"/>
+            <span class="card-title"><%= offer[:title] %></span>
+        </div>
 
-    <div class="card-content">
-      <p><%= offer[:teaser] %></p>
-    </div>
+        <div class="card-content">
+            <p><%= offer[:teaser] %></p>
+        </div>
 
-    <div class="card-action">
-      <div>
-        <a href="<%= offer[:link] %>" class="waves-effect waves-light btn"><%= "+ #{offer[:payout]}" %></a>
-        <span class="badge offer-type"><%= offer[:offer_types].last[:readable] %></span>
-      </div>
-      <span class="badge time-to-payout">
-        <i class="mdi-image-timer"></i>
-        <%= "#{offer[:time_to_payout][:readable]}" %>
-      </span>
+        <div class="card-action">
+            <div>
+                <a href="<%= offer[:link] %>" class="waves-effect waves-light btn"><%= "+ #{offer[:payout]}" %></a>
+                <span class="badge offer-type"><%= offer[:offer_types].last[:readable] %></span>
+            </div>
+            <span class="badge time-to-payout">
+                <i class="mdi-image-timer"></i>
+                <%= "#{offer[:time_to_payout][:readable]}" %>
+            </span>
+        </div>
     </div>
-  </div>
 
 </div>

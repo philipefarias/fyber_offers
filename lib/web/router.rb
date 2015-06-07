@@ -10,7 +10,6 @@ module FyberOffers
         enable :sessions
         set :views, settings.root + '/templates'
         set :erb, escape_html: true
-        set :scss, style: :compressed, debug_info: false
       end
 
       helpers do
@@ -24,13 +23,9 @@ module FyberOffers
         def partial(template, *args)
           options = args.extract_options!
           options.merge!(layout: false)
-          if collection = options.delete(:collection) then
+          if collection = options.delete(:collection)
             collection.inject([]) do |buffer, member|
-              buffer << erb(template, options.merge(
-                                         layout: false,
-                                         locals: { template.to_sym => member }
-                                     )
-              )
+              buffer << erb(template, options.merge(locals: { template.to_sym => member }))
             end.join("\n")
           else
             erb(template, options)
@@ -48,11 +43,6 @@ module FyberOffers
         @form   = OffersForm.new params
         @offers = @form.submit
         erb :index
-      end
-
-      get "/css/:name.css" do |name|
-        content_type :css
-        scss "css/#{name}".to_sym, :layout => false
       end
     end
 
