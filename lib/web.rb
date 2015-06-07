@@ -1,14 +1,21 @@
+ENV["RACK_ENV"] ||= "development"
+
 require_relative "api"
+require_relative "utils"
 require_relative "web/offers_form"
 require_relative "web/fetcher"
 require_relative "web/router"
-require "dotenv"
 require "yaml"
+require "dotenv"
+
+Dotenv.load(
+    File.expand_path("../../.#{ENV["RACK_ENV"]}.env", __FILE__),
+    File.expand_path("../../.env",  __FILE__)
+)
+
 
 module FyberOffers
   module Web
-
-    Dotenv.load
 
     CONFIG_FILE_PATH = File.expand_path("../../config.yml", __FILE__)
     CONFIG = YAML.load File.read(CONFIG_FILE_PATH)

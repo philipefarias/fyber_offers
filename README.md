@@ -17,7 +17,7 @@ After that, make sure all the tests are passing:
 
 Inform your API key and edit config.yml for the API url and default params:
 
-    $ cp .env.sample .env
+    $ cp .test.env .env
     $ <editor_of_choice> .env
     $ <editor_of_choice> config.yml
 
