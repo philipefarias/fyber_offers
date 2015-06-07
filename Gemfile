@@ -4,10 +4,7 @@ ruby "2.2.2"
 gem "rake"
 gem "sinatra"
 gem "curb"
-
-group :development, :test do
-  gem "dotenv"
-end
+gem "dotenv"
 
 group :development do
   gem "pry"
